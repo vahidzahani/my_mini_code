@@ -3,7 +3,7 @@ import os
 from collections import Counter, defaultdict
 
 # Log file
-log_file = 'allog'  # Replace with your actual log file
+log_file = 'logvahid.txt'  # Replace with your actual log file
 
 # Suspicious user agents
 suspicious_agents_keywords = [
@@ -20,10 +20,17 @@ user_agent_counter = Counter()
 ip_per_day = defaultdict(Counter)  # To count IPs per day
 
 # Regular expression pattern to parse log file
+# log_pattern = re.compile(
+#     r'(?P<ip>\d+\.\d+\.\d+\.\d+) - - \[(?P<datetime>\d{2}/\w{3}/\d{4}):[^\]]+\] '
+#     r'"(?:GET|POST) (?P<path>[^ ]+)[^"]*" \d+ \d+ "-" "(?P<agent>[^"]+)"'
+# )
+
+
 log_pattern = re.compile(
-    r'(?P<ip>\d+\.\d+\.\d+\.\d+) - - \[(?P<datetime>\d{2}/\w{3}/\d{4}):[^\]]+\] '
-    r'"(?:GET|POST) (?P<path>[^ ]+)[^"]*" \d+ \d+ "-" "(?P<agent>[^"]+)"'
+    r'(?P<datetime>\d{4}-\d{2}-\d{2})T\d{2}:\d{2}:\d{2} (?P<method>GET|POST|OPTIONS) \d+ (?P<ip>\d+\.\d+\.\d+\.\d+) '
+    r'"(?P<path>[^"]+)" "[^"]*" "(?P<agent>[^"]+)"'
 )
+
 
 # Get the directory of the log file
 log_dir = os.path.dirname(os.path.abspath(log_file))
