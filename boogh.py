@@ -1,6 +1,14 @@
 import winsound
 import time
 from datetime import datetime
+import os
+
+def set_terminal_color_blue_background_white_text():
+    """
+    Set Windows terminal background to blue and text to white.
+    Equivalent to 'color 1F' in cmd.
+    """
+    os.system("color 1F")
 
 
 def speaker():
@@ -47,6 +55,7 @@ def beep_on_five_minute_intervals():
 # === Run the function with clean exit support ===
 if __name__ == "__main__":
     try:
+        set_terminal_color_blue_background_white_text()
         beep_on_five_minute_intervals()
     except KeyboardInterrupt:
         print("\nProgram terminated successfully.")
