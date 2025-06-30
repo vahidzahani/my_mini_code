@@ -2,24 +2,51 @@ import winsound
 import time
 from datetime import datetime
 
+
+def speaker():
+    winsound.Beep(2000, 1000)
+    winsound.Beep(1000, 300)
+    winsound.Beep(1000, 100)
+    winsound.Beep(1000, 300)
+    winsound.Beep(1000, 300)
+    winsound.Beep(1000, 300)
+    winsound.Beep(1000, 300)
+
+
 def beep_on_five_minute_intervals():
-    winsound.Beep(1000, 500)
+    speaker()  # Play test beep once at startup
+
+    alerted = False  # Prevents repeated main beeps within same minute
+    warned  = False  # Prevents repeated warning beeps within same minute
+
     while True:
-        # گرفتن زمان فعلی سیستم
-        current_time = datetime.now()
-        current_minute = current_time.minute
-        print(current_time)
+        now    = datetime.now()
+        minute = now.minute
+        second = now.second
+        print(now.strftime("%H:%M:%S"))
 
-        # بررسی اینکه دقیقه فعلی مضربی از 5 باشد
-        if current_minute % 5 == 0:
-            # پخش صدای بوق (فرکانس 1000 هرتز به مدت 500 میلی‌ثانیه)
-            winsound.Beep(1000, 500)
+        # --- Warning beep: 10 seconds before a 5-minute mark ---
+        if minute % 5 == 4 and second >= 50 and not warned:
+            speaker()
+            warned = True
 
-            # منتظر ماندن برای 60 ثانیه تا دوباره همان دقیقه بوق نزند
-            time.sleep(60)
-        else:
-            # اگر دقیقه فعلی مضربی از 5 نبود، 10 ثانیه صبر کند و دوباره چک کند
-            time.sleep(10)
+        # --- Main beep: Exactly on the 5-minute mark (± 2 seconds) ---
+        if minute % 5 == 0 and second < 3 and not alerted:
+            #speaker()
+            alerted = True
+            warned = False  # Reset for the next cycle
 
-# اجرای تابع
-beep_on_five_minute_intervals()
+        # --- Reset flags if not on a 5-minute mark anymore ---
+        if minute % 5 != 0:
+            alerted = False
+            if minute % 5 != 4:
+                warned = False
+
+        time.sleep(1)  # CPU-friendly loop interval
+
+# === Run the function with clean exit support ===
+if __name__ == "__main__":
+    try:
+        beep_on_five_minute_intervals()
+    except KeyboardInterrupt:
+        print("\nProgram terminated successfully.")
