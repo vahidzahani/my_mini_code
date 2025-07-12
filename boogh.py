@@ -12,13 +12,10 @@ def set_terminal_color_blue_background_white_text():
 
 
 def speaker():
-    winsound.Beep(2000, 1000)
-    winsound.Beep(1000, 300)
-    winsound.Beep(1000, 100)
+    #winsound.Beep(2000, 1000)
     winsound.Beep(1000, 300)
     winsound.Beep(1000, 300)
-    winsound.Beep(1000, 300)
-    winsound.Beep(1000, 300)
+   
 
 
 def beep_on_five_minute_intervals():
