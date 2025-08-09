@@ -1,0 +1,8 @@
+get-childitem -Recurse | Select-String 'hamid'
+Get-ChildItem -Recurse *.txt | Select-String -Pattern "\d{11}"
+
+$a.Matches.Groups.value
+
+
+$a=Get-ChildItem -Recurse *.txt | Select-String -Pattern "09\d{9}"
+>> $a.Matches.Groups.value

@@ -15,6 +15,8 @@ def speaker():
     #winsound.Beep(2000, 1000)
     winsound.Beep(1000, 300)
     winsound.Beep(1000, 300)
+    winsound.Beep(1000, 400)
+    winsound.Beep(2000, 500)
    
 
 
