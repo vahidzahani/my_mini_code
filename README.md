@@ -63,6 +63,18 @@ You're reading it 😊 — this file explains the purpose of each script in the 
 
 ---
 
+
+---
+
+## 🌐 `ip_country_alert.py`
+
+Monitors the system's public IP address every 30 seconds and checks its country.
+If the public IP is detected as belonging to Iran (`IR`), the script displays an alert and plays a Ding sound using the `winsound` module.
+
+---
+
+
+
 ## ✅ Usage Tips
 - All scripts are written in **Python 3**.
 - Make sure to install external dependencies such as `beautifulsoup4` if needed:
